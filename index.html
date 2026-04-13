@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Весілля — 30 травня 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <section class="hero" id="hero">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+            <h1 class="hero__names">Павло <span class="hero__amp">&amp;</span> Анастасія</h1>
+            <div class="hero__date-line"></div>
+            <p class="hero__date">30 травня 2026</p>
+            <p class="hero__wedding">Запрошуємо на наше весілля</p>
+        </div>
+        <a href="#calendar" class="hero__scroll" aria-label="Прокрутити вниз">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path d="M7 12L15 20L23 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </a>
+    </section>
+
+    <section class="calendar-section" id="calendar">
+        <div class="container">
+            <h2 class="section-title calendar-section__greeting" id="hero-guest">Дорогі гості!</h2>
+            <p class="calendar-section__invite">Запрошуємо вас стати частиною нашого свята, яке відбудеться:</p>
+            <div class="calendar-card">
+                <div class="calendar" id="calendar-widget"></div>
+                <div class="calendar-card__divider">
+                    <span>до цього дня залишилось</span>
+                </div>
+                <div class="countdown__timer" id="countdown-timer">
+                    <div class="countdown__item">
+                        <span class="countdown__number" id="days">0</span>
+                        <span class="countdown__label">днів</span>
+                    </div>
+                    <div class="countdown__separator">·</div>
+                    <div class="countdown__item">
+                        <span class="countdown__number" id="hours">0</span>
+                        <span class="countdown__label">годин</span>
+                    </div>
+                    <div class="countdown__separator">·</div>
+                    <div class="countdown__item">
+                        <span class="countdown__number" id="minutes">0</span>
+                        <span class="countdown__label">хвилин</span>
+                    </div>
+                    <div class="countdown__separator">·</div>
+                    <div class="countdown__item">
+                        <span class="countdown__number" id="seconds">0</span>
+                        <span class="countdown__label">секунд</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="program" id="program">
+        <div class="container">
+            <h2 class="section-title">Чекаємо на вас тут</h2>
+            <div class="program__grid">
+                <div class="program__card">
+                    <div class="program__image">
+                        <img src="images/church.png" alt="Церква Різдва Пресвятої Богородиці">
+                    </div>
+                    <div class="program__info">
+                        <div class="program__time-row">
+                            <span class="program__time">12:30</span>
+                            <span class="program__label">Таїнство Вінчання</span>
+                        </div>
+                        <h3>Церква Різдва Пресвятої Богородиці</h3>
+                        <p class="program__address">майдан Святого Івана Павла ІІ, 1</p>
+                        <a href="https://maps.app.goo.gl/UrhiLVd8LApqPrte6" class="program__map-link" target="_blank" rel="noopener">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 1C5.24 1 3 3.24 3 6C3 9.75 8 15 8 15C8 15 13 9.75 13 6C13 3.24 10.76 1 8 1ZM8 7.5C7.17 7.5 6.5 6.83 6.5 6C6.5 5.17 7.17 4.5 8 4.5C8.83 4.5 9.5 5.17 9.5 6C9.5 6.83 8.83 7.5 8 7.5Z" fill="currentColor"/>
+                            </svg>
+                            Показати на мапі
+                        </a>
+                    </div>
+                </div>
+                <div class="program__card">
+                    <div class="program__image">
+                        <img src="images/restaurant.png" alt="Ресторан Park Art of Rest">
+                    </div>
+                    <div class="program__info">
+                        <div class="program__time-row">
+                            <span class="program__time">14:00</span>
+                            <span class="program__label">Церемонія розпису та святкування</span>
+                        </div>
+                        <h3>Ресторан «Park Art of Rest»</h3>
+                        <p class="program__address">вул. Вітовського, 43А</p>
+                        <a href="https://maps.app.goo.gl/dVkxo9yyPLeybDpH8" class="program__map-link" target="_blank" rel="noopener">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 1C5.24 1 3 3.24 3 6C3 9.75 8 15 8 15C8 15 13 9.75 13 6C13 3.24 10.76 1 8 1ZM8 7.5C7.17 7.5 6.5 6.83 6.5 6C6.5 5.17 7.17 4.5 8 4.5C8.83 4.5 9.5 5.17 9.5 6C9.5 6.83 8.83 7.5 8 7.5Z" fill="currentColor"/>
+                            </svg>
+                            Показати на мапі
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="story" id="story">
+        <div class="container">
+            <h2 class="section-title">Наша історія</h2>
+            <div class="story__photo">
+                <img src="images/history_img.jpg" alt="Павло та Анастасія">
+            </div>
+            <div class="timeline">
+                <div class="timeline__item">
+                    <div class="timeline__date">1 липня 2001</div>
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <h3>Народився Павло</h3>
+                    </div>
+                </div>
+                <div class="timeline__item">
+                    <div class="timeline__date">1 липня 2003</div>
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <h3>Народилась Анастасія</h3>
+                        <p>Одна дата на двох. Різні роки, але спільне майбутнє</p>
+                    </div>
+                </div>
+                <div class="timeline__item">
+                    <div class="timeline__date">29 липня 2020</div>
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <h3>Перша сторінка нашої історії</h3>
+                        <p>День, коли ми вирішили бути разом</p>
+                    </div>
+                </div>
+                <div class="timeline__item">
+                    <div class="timeline__date">25 травня 2025</div>
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__content">
+                        <h3>Заручини</h3>
+                        <p>Коли слова були зайвими, а серце знало відповідь.</p>
+                    </div>
+                </div>
+                <div class="timeline__item timeline__item--future">
+                    <div class="timeline__date">30 травня 2026</div>
+                    <div class="timeline__dot timeline__dot--heart" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M12 21 C2 13, 3 5, 9 5 C11 5, 12 7, 12 8 C12 7, 13 5, 15 5 C21 5, 22 13, 12 21 Z"/></svg>
+                    </div>
+                    <div class="timeline__content">
+                        <h3>Офіційно сім'я <span class="timeline__badge">скоро</span></h3>
+                        <p>Наш особливий день у колі найближчих</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dresscode" id="dresscode">
+        <div class="container">
+            <h2 class="section-title">Дрес-код</h2>
+            <p class="dresscode__subtitle">Будемо вдячні, якщо ви підтримаєте атмосферу нашого свята та оберете вбрання у такій кольоровій палітрі:</p>
+            <div class="dresscode__row">
+                <div class="dresscode__color" style="background-image: url('images/green_1.jpeg');"></div>
+                <div class="dresscode__color" style="background-image: url('images/green_1_2.jpeg');"></div>
+                <div class="dresscode__color" style="background-image: url('images/green_2.jpeg');"></div>
+                <div class="dresscode__color" style="background-image: url('images/green_3.jpeg');"></div>
+                <div class="dresscode__color" style="background-image: url('images/green_4-black.jpeg');"></div>
+            </div>
+            <div class="dresscode__row">
+                <div class="dresscode__color" style="background-image: url('images/brown_1-white.jpeg');"></div>
+                <div class="dresscode__color" style="background-image: url('images/brown_2.jpeg');"></div>
+                <div class="dresscode__color" style="background-image: url('images/brown_3.jpeg');"></div>
+                <div class="dresscode__color" style="background-image: url('images/brown_3_2.jpeg');"></div>
+                <div class="dresscode__color" style="background-image: url('images/brown_4.jpeg');"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="rsvp" id="rsvp">
+        <div class="container">
+            <h2 class="section-title">Підтвердження присутності</h2>
+            <p class="rsvp__subtitle">Будь ласка, дайте відповідь до 01 травня 2026</p>
+
+            <div class="rsvp__loading" id="rsvp-loading">
+                <div class="rsvp__spinner"></div>
+                <p>Завантаження...</p>
+            </div>
+
+            <form class="rsvp__form" id="rsvp-form" hidden>
+                <p class="rsvp__form-heading">Чи зможете приєднатися до святкування разом із нами?</p>
+                <div id="rsvp-guests-list"></div>
+
+                <p class="rsvp__form-heading">Ми подбаємо про вашу дорогу від храму до ресторану — чи потрібен вам трансфер?</p>
+                <div class="rsvp__guest-card">
+                    <span class="rsvp__guest-label">Трансфер</span>
+                    <div class="rsvp__toggle-group">
+                        <label class="rsvp__toggle">
+                            <input type="radio" name="transfer" value="yes">
+                            <span class="rsvp__toggle-btn">Так</span>
+                        </label>
+                        <label class="rsvp__toggle">
+                            <input type="radio" name="transfer" value="no" checked>
+                            <span class="rsvp__toggle-btn">Ні</span>
+                        </label>
+                    </div>
+                </div>
+
+                <p class="rsvp__form-heading">Маєте запитання або щось, що варто врахувати? Ми хочемо, щоб цей день був комфортним для кожного</p>
+                <div class="rsvp__field">
+                    <textarea id="rsvp-wishes" placeholder="Харчові алергії, особливі потреби, запитання..." rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="rsvp__submit">Надіслати</button>
+
+                <div class="rsvp__overlay" id="rsvp-overlay" hidden>
+                    <div class="rsvp__spinner"></div>
+                    <p>Надсилаємо...</p>
+                </div>
+            </form>
+
+            <div class="rsvp__success" id="rsvp-success" hidden>
+                <div class="rsvp__success-icon">&#10003;</div>
+                <h3>Дякуємо за відповідь!</h3>
+                <p>Ваші відповіді збережено.</p>
+                <div id="rsvp-summary"></div>
+                <button class="rsvp__edit-btn" id="rsvp-edit-btn">Змінити відповідь</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__names">Павло & Анастасія</p>
+            <p class="footer__date">30 травня 2026 · Львів</p>
+            <p class="footer__thanks">Дякуємо, що будете поруч з нами в цей день</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
