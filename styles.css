@@ -63,7 +63,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('images/main_img.jpg') center/cover no-repeat;
+    background: #3A4A35 url('images/main_img.jpg') center/cover no-repeat;
     color: var(--color-white);
     text-align: center;
     overflow: hidden;
