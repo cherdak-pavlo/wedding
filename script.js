@@ -6,13 +6,6 @@
     'use strict';
 
     // ── Helpers ──
-    // Decode Base64 from URL (handles + → space issue from URLSearchParams)
-    function b64Decode(str) {
-        var base64 = str.replace(/ /g, '+').replace(/-/g, '+').replace(/_/g, '/');
-        while (base64.length % 4) base64 += '=';
-        return decodeURIComponent(escape(atob(base64)));
-    }
-
     function escapeHtml(str) {
         return String(str)
             .replace(/&/g, '&amp;')
@@ -21,32 +14,19 @@
             .replace(/"/g, '&quot;');
     }
 
-    // ── Parse invitation data from URL ──
-    // The ?g= parameter contains a Base64-encoded JSON:
-    // { "t": "Дорогі Павло та Настя!", "n": ["Павло", "Анастасія"], "id": "pn01" }
+    // ── Load invitation data ──
+    // URL format:  site.com/#<id>  →  fetches guests/<id>.json
     //
-    // To generate a link, run in browser console:
-    //   var data = { t: "Дорогі Павло та Настя!", n: ["Павло", "Анастасія"], id: "pn01" };
-    //   btoa(unescape(encodeURIComponent(JSON.stringify(data))))
+    // guests/<id>.json shape:  { "t": "Дорогі ...!", "n": ["Ім'я1", "Ім'я2"] }
+    // ("id" is inferred from the filename — no need to duplicate inside the file)
     //
-    // Then use: index.html?g=<result>
-
-    var params = new URLSearchParams(window.location.search);
-    var guestParam = params.get('g');
-    var invitation = null;
-
-    if (guestParam) {
-        try {
-            invitation = JSON.parse(b64Decode(guestParam));
-        } catch (e) {
-            // invalid data — ignore
-        }
-    }
-
-    // ── Hero greeting ──
-    var heroGuest = document.getElementById('hero-guest');
-    if (invitation && invitation.t && heroGuest) {
-        heroGuest.textContent = invitation.t;
+    // To generate a new id:  crypto.randomUUID().replace(/-/g,'').slice(0,10)
+    //
+    // The actual fetch is kicked off in <head> of index.html (see window.__invitationPromise)
+    // to minimise delay — here we just await whatever was started.
+    function loadInvitation() {
+        if (window.__invitationPromise) return window.__invitationPromise;
+        return Promise.resolve(null);
     }
 
     // ── Countdown Timer ──
@@ -173,9 +153,15 @@
 
     initReveal();
 
-    // ── RSVP ──
+    // ── Invitation-dependent init (hero greeting + RSVP) ──
+    loadInvitation().then(function (invitation) {
 
-    // *** PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE ***
+    var heroGuest = document.getElementById('hero-guest');
+    if (invitation && invitation.t && heroGuest) {
+        heroGuest.textContent = invitation.t;
+    }
+
+    // ── RSVP ──
     var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzAd_G5J7v5Rvf95XfBB_lOsGQXS0iqDel1k8VqwnY_gUJ6zOLq7gWKNlHI6OXvLe2R/exec';
 
     var form = document.getElementById('rsvp-form');
@@ -189,7 +175,7 @@
     var guestNames = (invitation && invitation.n) ? invitation.n : [];
     var invitationId = (invitation && invitation.id) ? invitation.id : null;
 
-    // Anonymous visitors (no ?g= param) get a random id so their response is trackable
+    // Anonymous visitors (no #id in URL) get a random id so their response is trackable
     if (!invitationId && form) {
         var storedAnonId = null;
         try { storedAnonId = localStorage.getItem('rsvp_anon_id'); } catch (e) {}
@@ -403,5 +389,7 @@
             showState('form');
         });
     }
+
+    });
 
 })();

@@ -9,6 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="styles.css">
+    <script>
+        (function () {
+            var h = (location.hash || '').replace(/^#/, '').trim();
+            if (h && /^[A-Za-z0-9_-]+$/.test(h)) {
+                window.__invitationPromise = fetch('guests/' + h + '.json', { cache: 'no-cache' })
+                    .then(function (r) { return r.ok ? r.json() : null; })
+                    .then(function (d) { if (d && !d.id) d.id = h; return d; })
+                    .catch(function () { return null; });
+            }
+        })();
+    </script>
 </head>
 <body>
 
