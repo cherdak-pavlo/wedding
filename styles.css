@@ -1215,6 +1215,16 @@ body {
     border-bottom: none;
 }
 
+.rsvp__summary-row--block {
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.rsvp__summary-value--wishes {
+    line-height: 1.55;
+    white-space: pre-wrap;
+}
+
 .rsvp__summary-label {
     color: var(--color-text-light);
 }

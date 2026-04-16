@@ -363,9 +363,9 @@
             '<span class="rsvp__summary-value">' + (data.transfer === 'yes' ? 'Потрібен' : 'Не потрібен') + '</span>' +
             '</div>';
         if (data.wishes) {
-            html += '<div class="rsvp__summary-row">' +
+            html += '<div class="rsvp__summary-row rsvp__summary-row--block">' +
                 '<span class="rsvp__summary-label">Побажання</span>' +
-                '<span class="rsvp__summary-value">' + escapeHtml(data.wishes) + '</span>' +
+                '<span class="rsvp__summary-value rsvp__summary-value--wishes">' + escapeHtml(data.wishes) + '</span>' +
                 '</div>';
         }
         summaryBlock.innerHTML = html;
