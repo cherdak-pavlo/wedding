@@ -1066,6 +1066,7 @@ body {
 
 .rsvp__toggle {
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .rsvp__toggle input {
@@ -1082,7 +1083,7 @@ body {
     font-weight: 400;
     color: var(--color-text-light);
     background: var(--color-white);
-    transition: all 0.25s;
+    transition: background-color 0.2s, color 0.2s;
     user-select: none;
 }
 
@@ -1091,12 +1092,23 @@ body {
     color: var(--color-white);
 }
 
-.rsvp__toggle-btn:hover {
+.rsvp__toggle-btn:active {
     background: var(--color-bg-alt);
 }
 
-.rsvp__toggle input:checked + .rsvp__toggle-btn:hover {
+.rsvp__toggle input:checked + .rsvp__toggle-btn:active {
     background: var(--color-primary);
+    opacity: 0.85;
+}
+
+@media (hover: hover) {
+    .rsvp__toggle-btn:hover {
+        background: var(--color-bg-alt);
+    }
+
+    .rsvp__toggle input:checked + .rsvp__toggle-btn:hover {
+        background: var(--color-primary);
+    }
 }
 
 .rsvp__field textarea {
