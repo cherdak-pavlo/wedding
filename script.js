@@ -128,7 +128,7 @@
 
     renderCalendar();
 
-    // ── Scroll Reveal ──
+    // ── Scroll Reveal — sections ──
     function initReveal() {
         var sections = document.querySelectorAll(
             '.story, .calendar-section, .program, .dresscode, .rsvp'
@@ -144,7 +144,7 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
 
         sections.forEach(function (section) {
             observer.observe(section);
@@ -152,6 +152,79 @@
     }
 
     initReveal();
+
+    // ── Scroll Reveal — individual elements ──
+    function initElementReveal() {
+        // Timeline items — alternate left / right
+        document.querySelectorAll('.timeline__item').forEach(function (item, i) {
+            item.classList.add('reveal-item', i % 2 === 0 ? 'reveal-from-right' : 'reveal-from-left');
+            item.style.setProperty('--rd', (i * 0.1) + 's');
+        });
+
+        // Program cards — staggered bottom
+        document.querySelectorAll('.program__card').forEach(function (card, i) {
+            card.classList.add('reveal-item', 'reveal-from-bottom');
+            card.style.setProperty('--rd', (i * 0.18) + 's');
+        });
+
+        // Dresscode circles — scale pop, staggered
+        document.querySelectorAll('.dresscode__color').forEach(function (circle, i) {
+            circle.classList.add('reveal-item', 'reveal-scale');
+            circle.style.setProperty('--rd', (i * 0.07) + 's');
+        });
+
+        // Section titles
+        document.querySelectorAll('.section-title').forEach(function (title) {
+            title.classList.add('reveal-item', 'reveal-from-bottom');
+        });
+
+        // Story photo
+        var storyPhoto = document.querySelector('.story__photo');
+        if (storyPhoto) {
+            storyPhoto.classList.add('reveal-item', 'reveal-scale-up');
+        }
+
+        // Calendar invite text + card
+        var calInvite = document.querySelector('.calendar-section__invite');
+        if (calInvite) {
+            calInvite.classList.add('reveal-item', 'reveal-from-bottom');
+            calInvite.style.setProperty('--rd', '0.1s');
+        }
+        var calCard = document.querySelector('.calendar-card');
+        if (calCard) {
+            calCard.classList.add('reveal-item', 'reveal-from-bottom');
+            calCard.style.setProperty('--rd', '0.22s');
+        }
+
+        // RSVP subtitle
+        var rsvpSub = document.querySelector('.rsvp__subtitle');
+        if (rsvpSub) {
+            rsvpSub.classList.add('reveal-item', 'reveal-from-bottom');
+            rsvpSub.style.setProperty('--rd', '0.1s');
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var el = entry.target;
+                    el.classList.add('reveal-item--visible');
+                    observer.unobserve(el);
+                    // Remove the stagger delay after the reveal animation finishes
+                    // so it doesn't interfere with hover transitions
+                    el.addEventListener('transitionend', function clearDelay() {
+                        el.style.removeProperty('--rd');
+                        el.removeEventListener('transitionend', clearDelay);
+                    });
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.reveal-item').forEach(function (el) {
+            observer.observe(el);
+        });
+    }
+
+    initElementReveal();
 
     // ── Invitation-dependent init (hero greeting + RSVP) ──
     loadInvitation().then(function (invitation) {

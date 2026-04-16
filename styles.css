@@ -127,6 +127,14 @@ body {
     line-height: 1.1;
     letter-spacing: 0.03em;
     margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero__name--first,
+.hero__name--second {
+    display: block;
 }
 
 .hero__amp {
@@ -135,7 +143,7 @@ body {
     font-size: 0.6em;
     font-weight: 600;
     opacity: 1;
-    margin: 8px 0;
+    margin: 4px 0;
 }
 
 .hero__date-line {
@@ -182,6 +190,95 @@ body {
 @keyframes bounce {
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* — Hero entrance animations — */
+
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+        filter: blur(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes heroAmpAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.25) rotate(-18deg);
+        filter: blur(4px);
+    }
+    60% {
+        transform: scale(1.12) rotate(3deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        filter: blur(0);
+    }
+}
+
+@keyframes heroLineDraw {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 80px;
+        opacity: 1;
+    }
+}
+
+@keyframes heroGuestFade {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 0.95; transform: translateY(0); }
+}
+
+.hero__name--first {
+    animation: heroFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.hero__amp {
+    animation: heroAmpAppear 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s both;
+}
+
+.hero__name--second {
+    animation: heroFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.15s both;
+}
+
+.hero__date-line {
+    animation: heroLineDraw 1.1s cubic-bezier(0.16, 1, 0.3, 1) 1.4s both;
+    /* override margin shorthand so width-from-0 works cleanly */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero__date {
+    animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 1.6s both;
+}
+
+.hero__wedding {
+    animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 1.95s both;
+}
+
+.hero__guest {
+    animation: heroGuestFade 1s ease 2.3s both;
+}
+
+.hero__invite {
+    animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 2.15s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero__name--first, .hero__name--second, .hero__amp, .hero__date-line,
+    .hero__date, .hero__wedding, .hero__guest, .hero__invite {
+        animation: none;
+    }
 }
 
 /* ============================================
@@ -239,6 +336,7 @@ body {
 .story {
     padding: 100px 0;
     background: var(--color-bg-alt);
+    overflow-x: hidden;
 }
 
 .story__photo {
@@ -815,8 +913,8 @@ body {
 }
 
 .dresscode__color:hover {
-    transform: scale(1.08);
-    z-index: 2;
+    transform: scale(1.18);
+    z-index: 3;
 }
 
 /* ============================================
@@ -1189,7 +1287,7 @@ body {
 }
 
 /* ============================================
-   Animations (scroll reveal)
+   Animations (scroll reveal — sections)
    ============================================ */
 
 .reveal {
@@ -1204,10 +1302,37 @@ body {
 }
 
 /* ============================================
+   Animations (scroll reveal — elements)
+   ============================================ */
+
+.reveal-item {
+    opacity: 0;
+    transition:
+        opacity  0.65s ease                           var(--rd, 0s),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) var(--rd, 0s);
+}
+
+.reveal-from-left   { transform: translateX(-52px); }
+.reveal-from-right  { transform: translateX(52px);  }
+.reveal-from-bottom { transform: translateY(32px);  }
+.reveal-scale       { transform: scale(0.6);        }
+.reveal-scale-up    { transform: scale(0.94) translateY(16px); }
+
+.reveal-item--visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-item { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* ============================================
    Responsive
    ============================================ */
 
 @media (max-width: 768px) {
+
     .story__content {
         grid-template-columns: 1fr;
         gap: 32px;
