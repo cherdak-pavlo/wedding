@@ -935,23 +935,23 @@ body {
     line-height: 1.6;
 }
 
-.rsvp .section-title {
-    display: table;
-    margin-left: auto;
-    margin-right: auto;
+.rsvp__deadline {
+    white-space: nowrap;
     position: relative;
+    display: inline-block;
 }
 
-.rsvp .section-title::after {
+.rsvp__deadline::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -6px;
+    bottom: -2px;
     width: 0;
     height: 1.5px;
     background: var(--color-primary);
     animation: underline-draw 2.5s ease-in-out infinite;
 }
+
 
 @keyframes underline-draw {
     0%   { width: 0; opacity: 1; }
