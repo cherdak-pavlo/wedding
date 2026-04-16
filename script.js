@@ -14,16 +14,6 @@
             .replace(/"/g, '&quot;');
     }
 
-    // ── Load invitation data ──
-    // URL format:  site.com/#<id>  →  fetches guests/<id>.json
-    //
-    // guests/<id>.json shape:  { "t": "Дорогі ...!", "n": ["Ім'я1", "Ім'я2"] }
-    // ("id" is inferred from the filename — no need to duplicate inside the file)
-    //
-    // To generate a new id:  crypto.randomUUID().replace(/-/g,'').slice(0,10)
-    //
-    // The actual fetch is kicked off in <head> of index.html (see window.__invitationPromise)
-    // to minimise delay — here we just await whatever was started.
     function loadInvitation() {
         if (window.__invitationPromise) return window.__invitationPromise;
         return Promise.resolve(null);
@@ -226,7 +216,6 @@
 
     initElementReveal();
 
-    // ── Invitation-dependent init (hero greeting + RSVP) ──
     loadInvitation().then(function (invitation) {
 
     var heroGuest = document.getElementById('hero-guest');
@@ -248,7 +237,6 @@
     var guestNames = (invitation && invitation.n) ? invitation.n : [];
     var invitationId = (invitation && invitation.id) ? invitation.id : null;
 
-    // Anonymous visitors (no #id in URL) get a random id so their response is trackable
     if (!invitationId && form) {
         var storedAnonId = null;
         try { storedAnonId = localStorage.getItem('rsvp_anon_id'); } catch (e) {}
@@ -385,9 +373,7 @@
         if (wishes && data.wishes) wishes.value = data.wishes;
     }
 
-    // Fetch saved response from Google Sheets on page load
     function fetchSavedResponse() {
-        // Check server for anyone who has an id (personalized or anonymous)
         if (!APPS_SCRIPT_URL || !invitationId) {
             showState('form');
             return;
@@ -413,7 +399,6 @@
 
     fetchSavedResponse();
 
-    // Submit to Google Sheets
     function submitToSheets(data) {
         if (!APPS_SCRIPT_URL) {
             console.log('RSVP Data (no Apps Script URL configured):', data);

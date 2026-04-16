@@ -1,20 +1,3 @@
-// ============================================
-// Google Apps Script for Wedding RSVP
-// ============================================
-//
-// SETUP:
-// 1. Create a new Google Sheet
-// 2. Open Extensions → Apps Script
-// 3. Paste this entire code there
-// 4. Click Deploy → New deployment → Web app
-//    - Execute as: Me
-//    - Who has access: Anyone
-// 5. Copy the deployment URL and paste it into script.js (APPS_SCRIPT_URL)
-//
-// The sheet will have columns:
-// A: id | B: guest_name | C: attending | D: transfer | E: wishes | F: submitted_at
-//
-
 function doGet(e) {
   var id = e.parameter.id;
   if (!id) {
