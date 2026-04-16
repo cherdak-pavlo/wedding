@@ -1223,6 +1223,8 @@ body {
 .rsvp__summary-value--wishes {
     line-height: 1.55;
     white-space: pre-wrap;
+    overflow-wrap: break-word;
+    min-width: 0;
 }
 
 .rsvp__summary-label {
