@@ -262,7 +262,7 @@
                 '<div class="rsvp__guest-card" style="margin-top:8px">' +
                     '<span class="rsvp__label" style="margin:0">Чи будете присутні?</span>' +
                     '<div class="rsvp__toggle-group">' +
-                        '<label class="rsvp__toggle"><input type="radio" name="guest_0" value="yes" checked><span class="rsvp__toggle-btn">Так</span></label>' +
+                        '<label class="rsvp__toggle"><input type="radio" name="guest_0" value="yes"><span class="rsvp__toggle-btn">Так</span></label>' +
                         '<label class="rsvp__toggle"><input type="radio" name="guest_0" value="no"><span class="rsvp__toggle-btn">Ні</span></label>' +
                     '</div>' +
                 '</div>';
@@ -276,7 +276,7 @@
             card.innerHTML =
                 '<span class="rsvp__guest-name">' + name + '</span>' +
                 '<div class="rsvp__toggle-group">' +
-                    '<label class="rsvp__toggle"><input type="radio" name="guest_' + i + '" value="yes" checked><span class="rsvp__toggle-btn">Так</span></label>' +
+                    '<label class="rsvp__toggle"><input type="radio" name="guest_' + i + '" value="yes"><span class="rsvp__toggle-btn">Так</span></label>' +
                     '<label class="rsvp__toggle"><input type="radio" name="guest_' + i + '" value="no"><span class="rsvp__toggle-btn">Ні</span></label>' +
                 '</div>';
             guestsList.appendChild(card);
@@ -292,7 +292,7 @@
             var checked = form.querySelector('input[name="guest_' + i + '"]:checked');
             guests.push({
                 name: name,
-                attending: checked ? checked.value : 'yes'
+                attending: checked ? checked.value : ''
             });
         });
 
@@ -301,7 +301,7 @@
             var checked = form.querySelector('input[name="guest_0"]:checked');
             guests.push({
                 name: nameInput ? nameInput.value : '',
-                attending: checked ? checked.value : 'yes'
+                attending: checked ? checked.value : ''
             });
         }
 
@@ -311,7 +311,7 @@
         return {
             id: invitationId,
             guests: guests,
-            transfer: transferChecked ? transferChecked.value : 'no',
+            transfer: transferChecked ? transferChecked.value : '',
             wishes: wishes ? wishes.value : ''
         };
     }
@@ -431,9 +431,37 @@
     }
 
     // Submit handler
+    function validateForm() {
+        var groups = form.querySelectorAll('.rsvp__toggle-group');
+        var valid = true;
+        groups.forEach(function (group) {
+            var name = group.querySelector('input[type="radio"]').name;
+            var checked = form.querySelector('input[name="' + name + '"]:checked');
+            if (!checked) {
+                group.classList.add('rsvp__toggle-group--error');
+                valid = false;
+            } else {
+                group.classList.remove('rsvp__toggle-group--error');
+            }
+        });
+        if (!valid) {
+            var first = form.querySelector('.rsvp__toggle-group--error');
+            if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return valid;
+    }
+
     if (form) {
+        form.addEventListener('change', function (e) {
+            if (e.target.type === 'radio') {
+                var group = e.target.closest('.rsvp__toggle-group');
+                if (group) group.classList.remove('rsvp__toggle-group--error');
+            }
+        });
+
         form.addEventListener('submit', function (e) {
             e.preventDefault();
+            if (!validateForm()) return;
             submitToSheets(collectFormData());
         });
     }

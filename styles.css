@@ -1058,10 +1058,11 @@ body {
 /* Toggle buttons (yes/no) */
 .rsvp__toggle-group {
     display: flex;
-    gap: 0;
+    gap: 1px;
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid #E0D8CC;
+    background: #E0D8CC;
 }
 
 .rsvp__toggle {
@@ -1085,6 +1086,18 @@ body {
     background: var(--color-white);
     transition: background-color 0.2s, color 0.2s;
     user-select: none;
+}
+
+.rsvp__toggle-group--error {
+    border-color: #c0392b;
+    background: #c0392b;
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
 }
 
 .rsvp__toggle input:checked + .rsvp__toggle-btn {
